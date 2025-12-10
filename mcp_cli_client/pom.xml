@@ -18,13 +18,11 @@
             <groupId>com.google.adk</groupId>
             <artifactId>google-adk</artifactId>
             <version>0.4.0</version>
-
         </dependency>
         <dependency>
             <groupId>com.google.adk</groupId>
             <artifactId>google-adk-firestore-session-service</artifactId>
             <version>0.4.0</version>
-
         </dependency>
         <dependency>
             <groupId>com.google.cloud</groupId>
