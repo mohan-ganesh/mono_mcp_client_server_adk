@@ -19,7 +19,6 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <start-class>com.example.garvik.McpClientApplication</start-class>
   </properties>
 
   <dependencyManagement>
@@ -67,7 +66,14 @@
       <groupId>com.google.adk</groupId>
       <artifactId>google-adk-firestore-session-service</artifactId>
       <version>0.4.0</version>
-      <scope>test</scope>
+
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.adk</groupId>
+      <artifactId>google-adk-firestore-session-service</artifactId>
+      <version>0.4.0</version>
+
     </dependency>
     <dependency>
       <groupId>com.google.cloud</groupId>

@@ -1,4 +1,4 @@
-package com.example.adkclient;
+package com.example.garvik;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -14,6 +14,8 @@ import com.google.cloud.firestore.FirestoreOptions;
 import com.google.genai.types.Content;
 import com.google.genai.types.Part;
 import io.reactivex.rxjava3.core.Flowable;
+
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -31,7 +33,12 @@ public class CLIMcpClient extends AdkClientBase {
     RunConfig runConfig = RunConfig.builder().build();
     String appName = "orchestrator-app";
 
-    BaseAgent timeAgent = client.initAgent();
+
+     List<String> mcpServerUrls = List.of(
+       "https://mcp-appointment-server-880624566657.us-central1.run.app/appointment-domain-tools/sse",
+       "https://mcp-benefits-server-880624566657.us-central1.run.app/benefits-domain-tools/sse"
+    );
+    BaseAgent timeAgent = client.initAgent(mcpServerUrls);
 
     // Initialize Firestore
     FirestoreOptions firestoreOptions = FirestoreOptions.getDefaultInstance();

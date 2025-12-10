@@ -1,4 +1,7 @@
-package com.example.garvik.agent;
+package com.example.garvik;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.adk.agents.BaseAgent;
 import com.google.adk.agents.Callbacks;
@@ -17,19 +20,13 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
+
 
 public class AdkClientBase {
 
   public static final Logger logger = LoggerFactory.getLogger(AdkClientBase.class);
 
-  @Value("${gemini.model.name:gemini-2.5-flash}")
-  private String modelName;
 
-  @Value("${mcp.server.urls:}")
-  private List<String> mcpServerUrls;
 
   /**
    * Initializes the BaseAgent with tools from MCP servers.
@@ -37,7 +34,7 @@ public class AdkClientBase {
    * @return The initialized BaseAgent.
    */
   public BaseAgent initAgent() {
-    return initAgent(null, mcpServerUrls);
+    return initAgent(null, new ArrayList<>());
   }
 
   /**
@@ -48,7 +45,6 @@ public class AdkClientBase {
   public BaseAgent initAgent(List<String> mcpServerUrls) {
     return initAgent(null, mcpServerUrls);
   }
-
   /**
    * Initializes the BaseAgent with tools from MCP servers and an optional callback.
    *
@@ -56,9 +52,8 @@ public class AdkClientBase {
    * @return The initialized BaseAgent.
    */
   public BaseAgent initAgent(Callbacks.AfterModelCallback afterModelCallback) {
-    return initAgent(afterModelCallback, mcpServerUrls);
+    return initAgent(afterModelCallback, new ArrayList<>());
   }
-
 
   /**
    * Initializes the BaseAgent with tools from MCP servers and an optional callback.
@@ -76,7 +71,7 @@ public class AdkClientBase {
     }
 
     logger.info("Total tools loaded: " + tools.size());
-    modelName = modelName != null ? modelName : "gemini-2.5-flash";
+
     LlmAgent.Builder agentBuilder =
         LlmAgent.builder()
             .name("member-agent")
@@ -91,7 +86,7 @@ public class AdkClientBase {
                 Always ensure to confirm the appointment creation and notification to the user.
                 User 'Prescription_Benefits' and 'Medical_Benefits' tools to get benefits information if the user asks about benefits.
                 """)
-            .model(modelName)
+            .model("gemini-2.5-flash")
             .tools(tools);
 
     if (afterModelCallback != null) {
@@ -187,7 +182,7 @@ public class AdkClientBase {
   }
 
   /** */
-  protected static void trustAllCertificates() {
+  protected void trustAllCertificates() {
     try {
       TrustManager[] trustAllCerts =
           new TrustManager[] {
