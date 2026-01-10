@@ -1,5 +1,9 @@
 Mono repository for MCP Client and Server using Google Agent ADK
-In this repo, you have 34 modules. for details and instruction you can refer https://mohan-ganesh.appspot.com/mcp/mcp-client-server-architecture
+
+🚀 **Full Guide &  Breakdown**: [https://www.garvik.dev/mcp/mcp-client-server-architecture](https://www.garvik.dev/mcp/mcp-client-server-architecture)
+
+In this repo, you have 4 modules. 
+
 
 `mcp_billing_server` - MCP Billing Server module that hosts billing related tools.
 
